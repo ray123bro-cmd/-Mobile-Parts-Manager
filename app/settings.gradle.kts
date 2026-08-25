@@ -14,4 +14,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "مدير قطع غيار السيارات المتنقلة"
+rootProject.name = "Mobile Parts Manager"
