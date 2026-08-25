@@ -7,12 +7,14 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(
+        org.gradle.api.initialization.resolve.RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    )
     repositories {
         google()
         mavenCentral()
     }
 }
 
-rootProject.name = "MobilePartsManager"
+rootProject.name = "Mobile Parts Manager"
 include(":app")
