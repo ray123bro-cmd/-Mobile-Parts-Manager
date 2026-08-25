@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Mobile Parts"
-include(":app")
+include(":برنامج")
