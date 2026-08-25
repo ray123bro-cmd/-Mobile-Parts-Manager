@@ -1,10 +1,11 @@
 name: Build Android APK
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+      - master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -22,13 +23,16 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.9'
+
+      - name: Find Android project
+        run: |
+          echo "Project files:"
+          find . -maxdepth 3 -type f | sort
 
       - name: Build APK
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --stacktrace
 
       - name: Find APK
         run: |
@@ -38,5 +42,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Mobile-Parts-Manager-APK
-          path: '**/build/outputs/apk/debug/*.apk'
-          if-no-files-found: error
+          path: "**/build/outputs/apk/debug/*.apk"
