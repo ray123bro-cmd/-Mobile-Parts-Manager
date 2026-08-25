@@ -26,11 +26,17 @@ jobs:
           gradle-version: '8.9'
 
       - name: Build APK
-        working-directory: ./برنامج/برنامج
-        run: gradle assembleDebug
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
+
+      - name: Find APK
+        run: |
+          find . -type f -name "*.apk" -print
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Mobile-Parts-Manager-APK
-          path: برنامج/برنامج/build/outputs/apk/debug/*.apk
+          path: '**/build/outputs/apk/debug/*.apk'
+          if-no-files-found: error
