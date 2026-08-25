@@ -21,13 +21,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-
       - name: Find Android project
         run: |
-          echo "Project files:"
-          find . -maxdepth 3 -type f | sort
+          echo "Searching for Android project..."
+          find . -name "settings.gradle*" -o -name "build.gradle*"
+          find . -name "AndroidManifest.xml"
 
       - name: Build APK
         run: |
@@ -43,3 +41,4 @@ jobs:
         with:
           name: Mobile-Parts-Manager-APK
           path: "**/build/outputs/apk/debug/*.apk"
+          if-no-files-found: error
