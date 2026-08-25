@@ -4,7 +4,7 @@
     <application
         android:allowBackup="true"
         android:label="قطع الموبايلات"
-        android:theme="@style/Theme.MobileParts">
+        android:theme="@android:style/Theme.Material.Light.NoActionBar"
 
         <activity
             android:name=".MainActivity"
