@@ -7,12 +7,14 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
     }
 }
 
-rootProject.name = "Mobile Parts"
+rootProject.name = "قطع غيار السيارات"
+
 include(":app")
+
+project(":app").projectDir = file("برنامج")
