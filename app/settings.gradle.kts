@@ -14,5 +14,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MobileParts"
-include(":app")
+rootProject.name = "مدير قطع غيار السيارات المتنقلة"
