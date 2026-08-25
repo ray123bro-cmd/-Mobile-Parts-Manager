@@ -21,24 +21,26 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Find Android project
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Check Android project
         run: |
-          echo "Searching for Android project..."
-          find . -name "settings.gradle*" -o -name "build.gradle*"
-          find . -name "AndroidManifest.xml"
+          echo "Android project files:"
+          find "برنامج/برنامج" -maxdepth 4 -type f | sort
 
       - name: Build APK
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew -p "برنامج/برنامج" assembleDebug --stacktrace
 
       - name: Find APK
         run: |
-          find . -type f -name "*.apk" -print
+          find "برنامج/برنامج" -type f -name "*.apk" -print
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Mobile-Parts-Manager-APK
-          path: "**/build/outputs/apk/debug/*.apk"
+          path: "برنامج/برنامج/**/build/outputs/apk/debug/*.apk"
           if-no-files-found: error
