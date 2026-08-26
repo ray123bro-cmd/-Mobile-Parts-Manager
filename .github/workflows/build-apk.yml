@@ -25,49 +25,18 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Find Android project
-        shell: bash
-        run: |
-          PROJECT_DIR=""
-
-          if [ -f "settings.gradle" ] || [ -f "settings.gradle.kts" ]; then
-            PROJECT_DIR="."
-          else
-            PROJECT_DIR=$(find . -type f \( -name "settings.gradle" -o -name "settings.gradle.kts" \) -print -quit | xargs -r dirname)
-          fi
-
-          if [ -z "$PROJECT_DIR" ]; then
-            echo "ERROR: لم يتم العثور على settings.gradle أو settings.gradle.kts"
-            echo "محتويات المستودع:"
-            find . -maxdepth 3 -type f | sort
-            exit 1
-          fi
-
-          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
-          echo "Android project found at: $PROJECT_DIR"
-
       - name: Build APK
-        shell: bash
         run: |
-          cd "$PROJECT_DIR"
-
-          if [ -f "./gradlew" ]; then
-            chmod +x ./gradlew
-            ./gradlew --no-daemon assembleDebug
-          else
-            echo "gradlew غير موجود، سيتم استخدام Gradle المثبت على GitHub."
-            gradle --no-daemon assembleDebug
-          fi
+          cd app
+          gradle assembleDebug --no-daemon
 
       - name: Find APK
-        shell: bash
         run: |
-          echo "البحث عن ملف APK..."
-          find "$PROJECT_DIR" -type f -name "*.apk" -print
+          find app -type f -name "*.apk" -print
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Mobile-Parts-Manager-APK
-          path: ${{ env.PROJECT_DIR }}/app/build/outputs/apk/debug/*.apk
+          path: app/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
