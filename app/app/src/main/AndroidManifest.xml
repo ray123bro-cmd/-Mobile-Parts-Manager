@@ -6,10 +6,11 @@
     <application
         android:allowBackup="true"
         android:label="مدير قطع غيار السيارات المتنقلة"
+        android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.Light.NoActionBar">
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.mobileparts.app.MainActivity"
             android:exported="true">
 
             <intent-filter>
