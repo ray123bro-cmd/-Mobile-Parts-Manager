@@ -5,7 +5,7 @@
         android:allowBackup="true"
         android:label="Mobile Parts Manager"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App">
+        android:theme="@style/Theme.MobilePartsManager">
 
         <activity
             android:name=".MainActivity"
